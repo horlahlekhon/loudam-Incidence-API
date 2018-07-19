@@ -16,6 +16,7 @@ libraryDependencies += "joda-time" % "joda-time" % "2.7"
 libraryDependencies += "org.joda" % "joda-convert" % "1.7"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.7"
 libraryDependencies += "com.github.tototoshi" %% "slick-joda-mapper" % "2.3.0"
+libraryDependencies += jdbc % Test
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "lagos Software Engineering group.controllers._"

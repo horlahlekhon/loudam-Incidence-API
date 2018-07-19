@@ -13,7 +13,7 @@ POST  /account/remove             controllers.AccountController.remove(name: Str
 
 # Incidence Routes
 GET  /incidence                           controllers.IncidenceController.getAllIncidence
-#GET  /incidence/:name                     controllers.IncidenceController.getByUsername(name: String DateTime)
+GET  /incidence/:name/:time                     controllers.IncidenceController.getByUsername(name: String,time: String)
 
 
 POST /incidence/add                       controllers.IncidenceController.add

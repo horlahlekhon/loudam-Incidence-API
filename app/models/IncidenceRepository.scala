@@ -40,9 +40,8 @@ class IncidenceRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(i
     }
 
     // Returning list of incidence
-  def getAllIncidence(): Future[Seq[Incidence]] = db.run{
-    incidence.result
-  }
+  def getAllIncidence(): Future[Seq[Incidence]] = db.run(incidence.result)
+    
 
 // Returning a single message by a username, filtering with postdate  
   def getSingleIncidence(username : String, postdate:DateTime):Future[Option[Incidence]]  = db.run{

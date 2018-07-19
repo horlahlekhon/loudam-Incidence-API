@@ -8,20 +8,30 @@ import play.api.libs.json.Json
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.json.{JsError, JsValue, Json}
 import org.joda.time.DateTime
+import org.joda.time.format._
 import scala.concurrent.Future
 
 @Singleton
 class IncidenceController @Inject()(cc: ControllerComponents,
 repo: IncidenceRepository) extends AbstractController(cc) {
 
-  def getAllIncidence = Action.async { implicit request =>
-   repo.getAllIncidence.map { messages
-     =>   Ok(Json.toJson(messages))
+  def getAllIncidence = Action.async { implicit request:RequestHeader =>
+   repo.getAllIncidence.map { incidence =>  
+    Ok(Json.toJson(incidence))
     }
   }
   
-  def getByUsername(username:String,date:DateTime) = Action.async { implicit request =>      
-      repo.getSingleIncidence(username,date).map {  incidence => Ok(Json.toJson(incidence)) }
+  def getByUsername(username:String,date:String) = Action.async { implicit request =>      
+      val fmt = DateTimeFormat.forPattern("yyyy-MM-dd'--'HH:mm:ss")
+      try {
+        val dater = fmt.parseDateTime(date)
+        repo.getSingleIncidence(username,dater).map {  
+          incidence => Ok(Json.toJson(incidence)) }
+      } catch {
+        case ex:java.lang.IllegalArgumentException =>  Future{Ok(Json.toJson("invalid date format, kindly adhere to this pattern" 
+                                          ->  "yyyy-MM-dd'--'HH:mm:ss....Example: '2016-09-07--12:21:11'"))}
+      }
+      
     }
   
    def add = Action(parse.json) { request =>
