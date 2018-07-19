@@ -1,0 +1,22 @@
+
+#  Account Routes
+GET  /                                    controllers.AccountController.getAllAccount
+GET  /account/:user                       controllers.AccountController.getUser(user: String)
+
+POST   /account/add                       controllers.AccountController.add
+#deleting account
+POST  /account/remove             controllers.AccountController.remove(name: String)
+
+
+
+
+
+# Incidence Routes
+GET  /incidence                           controllers.IncidenceController.getAllIncidence
+#GET  /incidence/:name                     controllers.IncidenceController.getByUsername(name: String DateTime)
+
+
+POST /incidence/add                       controllers.IncidenceController.add
+
+#deleting incidence
+POST /incidence/remove                  controllers.IncidenceController.remove
