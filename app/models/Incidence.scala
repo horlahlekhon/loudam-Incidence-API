@@ -48,18 +48,4 @@ object Incidence {
         JsSuccess(Incidence( username, description, postdate, incidencelocation ))
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

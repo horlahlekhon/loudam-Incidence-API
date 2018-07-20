@@ -21,11 +21,17 @@ repo: IncidenceRepository) extends AbstractController(cc) {
     }
   }
   
-  def getByUsername(username:String,date:String) = Action.async { implicit request =>      
+  def getByUsername(username:String) = Action.async { implicit request =>            
+         repo.getUserIncidence(username).map {  
+          incidence => 
+          Ok(Json.toJson(incidence)) }         
+    }
+
+    def getByUserAndTime(username:String,date:String) = Action.async { implicit request =>      
       val fmt = DateTimeFormat.forPattern("yyyy-MM-dd'--'HH:mm:ss")
       try {
         val dater = fmt.parseDateTime(date)
-        repo.getSingleIncidence(username,dater).map {  
+        repo.getUserIncidenceByDate(username,dater).map {  
           incidence => Ok(Json.toJson(incidence)) }
       } catch {
         case ex:java.lang.IllegalArgumentException =>  Future{Ok(Json.toJson("invalid date format, kindly adhere to this pattern" 

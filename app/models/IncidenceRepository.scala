@@ -44,9 +44,15 @@ class IncidenceRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(i
     
 
 // Returning a single message by a username, filtering with postdate  
-  def getSingleIncidence(username : String, postdate:DateTime):Future[Option[Incidence]]  = db.run{
-        incidence.filter(_.username === username).filter(_.postdate === postdate).result.headOption
+  def getUserIncidenceByDate(username : String, postdate:DateTime):Future[Seq[Incidence]]  = db.run{
+        incidence.filter(_.username === username).filter(_.postdate === postdate).result
   }
+
+// Returning messages by a username
+  def getUserIncidence(username : String):Future[Seq[Incidence]]  = db.run{
+        incidence.filter(_.username === username).result
+  }
+
   //get all incidence of a uploaded by a single user 
   def getAllIncidenceOfASingleUser(username:String) : Future[Seq[Incidence]] = db.run(incidence.filter(_.username === username).result)
 
