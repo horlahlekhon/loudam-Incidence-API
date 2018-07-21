@@ -41,13 +41,13 @@ repo: IncidenceRepository) extends AbstractController(cc) {
     },
     account => {      
       repo.createAccount(account)          
-      Ok(Json.obj("status" ->"OK", "message" -> ("User '"+account.username+"'  saved.") ))
+      Ok(Json.obj("status" ->"OK", "message" -> ("User '"+account.username+"'  has been added.") ))
     }
   )
 }
 
 def remove(username: String) = Action { request =>
         repo.removeAccount(username)          
-        Ok("Done")
+        Ok(s"$username has been removed")
  }
 }

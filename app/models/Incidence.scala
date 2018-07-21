@@ -8,7 +8,7 @@ import javax.inject.{Inject,Singleton}
 
 
 @Singleton  //add location to the models
-case class Incidence  @Inject()( username:String, description:String, postdate: DateTime, incidencelocation:String)
+case class Incidence  @Inject()( username:String, description:String, incidencelocation:String, postdate: Option[DateTime]=None )
 
 
 object Incidence {
@@ -17,11 +17,6 @@ object Incidence {
  implicit val  myFormat = Format[DateTime](Reads.jodaDateReads(pattern), Writes.jodaDateWrites(pattern))
  implicit val jsonFormat = Json.format[Incidence]
 
-//  implicit val format =Json.format[Incidence]
-//  implicit val full = new OFormat[Incidence]{
-// override def writes(o: Incidence): JsObject = format.writes(o).asInstanceOf[JsObject]
-
-// override def reads (json: JsValue): JsResult[Incidence] = format.reads(json)     }
 
 
   implicit val IncidenceWrites = new Writes[Incidence] 
@@ -42,10 +37,10 @@ object Incidence {
         // val id = (json \ "id").as[Int]
         val username = (json \ "username").as[String]
         val description = (json \ "description").as[String]
-        val postdate = (json\ "postdate").as[DateTime]
+        // val postdate = (json\ "postdate").as[DateTime]
         val incidencelocation = (json \ "incidencelocation").as[String]
         
-        JsSuccess(Incidence( username, description, postdate, incidencelocation ))
+        JsSuccess(Incidence( username, description, incidencelocation ))
     }
 }
 }

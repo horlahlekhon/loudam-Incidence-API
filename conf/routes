@@ -5,7 +5,7 @@ GET  /account/:user                       controllers.AccountController.getUser(
 
 POST   /account/add                       controllers.AccountController.add
 #deleting account
-POST  /account/remove/:name               controllers.AccountController.remove(name: String)
+DELETE  /account/remove/:name               controllers.AccountController.remove(name: String)
 
 
 
@@ -20,4 +20,4 @@ GET  /incidence/:name/:time               controllers.IncidenceController.getByU
 POST /incidence/add                       controllers.IncidenceController.add
 
 #deleting incidence
-POST /incidence/remove                    controllers.IncidenceController.remove
+DELETE /incidence/remove                    controllers.IncidenceController.remove

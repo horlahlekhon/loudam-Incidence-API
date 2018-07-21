@@ -5,7 +5,6 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import org.joda.time.DateTime
 import scala.concurrent.{ Future, ExecutionContext }
-// import scala.concurrent.ExecutionContext.Implicits.global
 import com.github.tototoshi.slick.PostgresJodaSupport._
 
 
@@ -23,7 +22,7 @@ class IncidenceRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(i
 
     def description = column[String]("description")
 
-    def postdate = column[DateTime]("postdate")
+    def postdate = column[Option[DateTime]]("postdate")
 
     def incidencelocation = column[String]("incidencelocation")
 
